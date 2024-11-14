@@ -35,3 +35,29 @@ tsc -w
 yarn start:dev
 
 ```
+
+```js
+// app.ts
+import express from "express";
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello Express JS");
+});
+
+export default app;
+
+// server.ts
+import { Server } from "http";
+import app from "./app";
+const PORT = 3000;
+
+let server: Server;
+
+async function bootstrap() {
+  server = app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`);
+  });
+}
+bootstrap();
+```
