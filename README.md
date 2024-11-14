@@ -19,4 +19,19 @@ tsc --init
 yarn add -D @types/node
 yarn add -D @types/express
 
+// Compile TypeScript files once
+tsc
+// Compile TypeScript files in watch mode (automatically recompile on changes)
+tsc -w
+
+// for real runtime
+yarn add -D nodemon
+tsc -w
+
+"scripts": {
+    "start:dev": "nodemon ./dist/app/server.js",
+  },
+
+yarn start:dev
+
 ```
