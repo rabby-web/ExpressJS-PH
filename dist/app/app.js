@@ -8,17 +8,21 @@ const app = (0, express_1.default)();
 // parsers
 app.use(express_1.default.json());
 app.use(express_1.default.text());
+const logger = (req, res, next) => {
+    console.log(req.url, req.method, req.hostname);
+    next();
+};
 // http://localhost:3000/10/21
 // app.get("/:userId/:subId", (req: Request, res: Response) => {
 //   console.log(req.query);
 //   res.send("Hello Express Project");
 // });
 // http://localhost:3000?email=mezba@gmail.com&name=rabby
-app.get("/", (req, res) => {
+app.get("/", logger, (req, res) => {
     console.log(req.query);
     res.send("Hello Express Project");
 });
-app.post("/", (req, res) => {
+app.post("/", logger, (req, res) => {
     console.log(req.body);
     res.json({
         message: "Successfully received data",
