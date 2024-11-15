@@ -1,8 +1,19 @@
-import express from "express";
+import express, { Request, Response } from "express";
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello Express JS");
+// parsers
+app.use(express.json());
+app.use(express.text());
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello Express Project");
+});
+
+app.post("/", (req: Request, res: Response) => {
+  console.log(req.body);
+  res.json({
+    message: "Successfully received data",
+  });
 });
 
 export default app;
