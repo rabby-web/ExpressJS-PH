@@ -42,16 +42,41 @@ const logger = (req: Request, res: Response, next: NextFunction) => {
 // });
 
 // http://localhost:3000?email=mezba@gmail.com&name=rabby
-app.get("/", logger, (req: Request, res: Response) => {
-  console.log(req.query);
-  res.send("Hello Express Project");
-});
+app.get(
+  "/",
+  logger,
+  async (req: Request, res: Response, next: NextFunction) => {
+    // console.log(req.query);
+    // res.send(something);
+    try {
+      res.send(something);
+    } catch (error) {
+      console.log(error);
+      next(error);
+      // res.status(400).json({
+      //   success: false,
+      //   message: "failed to get data",
+      // });
+    }
+  }
+);
 
 app.post("/", logger, (req: Request, res: Response) => {
   console.log(req.body);
   res.json({
     message: "Successfully received data",
   });
+});
+
+// global error handling
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(error);
+  if (error) {
+    res.status(400).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
 });
 
 export default app;
