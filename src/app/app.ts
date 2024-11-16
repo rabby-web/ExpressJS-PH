@@ -68,6 +68,14 @@ app.post("/", logger, (req: Request, res: Response) => {
   });
 });
 
+// routes not found
+app.all("*", (req: Request, res: Response) => {
+  res.status(400).json({
+    success: false,
+    message: "Routes not found",
+  });
+});
+
 // global error handling
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   console.log(error);

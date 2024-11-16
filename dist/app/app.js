@@ -70,6 +70,13 @@ app.post("/", logger, (req, res) => {
         message: "Successfully received data",
     });
 });
+// routes not found
+app.all("*", (req, res) => {
+    res.status(400).json({
+        success: false,
+        message: "Routes not found",
+    });
+});
 // global error handling
 app.use((error, req, res, next) => {
     console.log(error);
